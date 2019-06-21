@@ -2,13 +2,31 @@
 using System;
 using System.IO;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace AesExample
 {
     class Program
     {
+        // se define el tamaño del key y del vector
+
+        private static readonly int tamanyoClave = 32;
+        private static readonly int tamanyoVector = 16;
+
+        // Define la palabra clave para el cifrado y
+        private static readonly string Clave = "Juan Sin Miedo";
+        private static readonly string Vector = "Estoes una prueba837723";
+
+        // se convierte el vector y la key a bytes
+
+        public static byte[] Key = UTF8Encoding.UTF8.GetBytes(Clave);
+        public static byte[] IV = UTF8Encoding.UTF8.GetBytes(Vector);
+
         static void Main(string[] args)
         {
+            Array.Resize(ref Key, tamanyoClave);
+            Array.Resize(ref IV, tamanyoVector);
+
             string original = "Here is some data to encrypt!";
 
             // Create a new instance of the Aes
@@ -17,11 +35,16 @@ namespace AesExample
             using (Aes myAes = Aes.Create())
             {
 
+                //// Encrypt the string to an array of bytes.
+                //byte[] encrypted = EncryptStringToBytes_Aes(original, myAes.Key, myAes.IV);
+
+                //// Decrypt the bytes to a string.
+                //string roundtrip = DecryptStringFromBytes_Aes(encrypted, myAes.Key, myAes.IV);
                 // Encrypt the string to an array of bytes.
-                byte[] encrypted = EncryptStringToBytes_Aes(original, myAes.Key, myAes.IV);
+                byte[] encrypted = EncryptStringToBytes_Aes(original, Key, IV);
 
                 // Decrypt the bytes to a string.
-                string roundtrip = DecryptStringFromBytes_Aes(encrypted, myAes.Key, myAes.IV);
+                string roundtrip = DecryptStringFromBytes_Aes(encrypted, Key, IV);
 
                 //Display the original data and the decrypted data.
                 Console.WriteLine("Original:   {0}", original);
