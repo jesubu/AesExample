@@ -14,8 +14,8 @@ namespace AesExample
         private static readonly int tamanyoVector = 16;
 
         // Define la palabra clave para el cifrado y
-        private static readonly string Clave = "Juan Sin Miedo";
-        private static readonly string Vector = "Estoes una prueba837723";
+        private static readonly string Clave = "5037F160";
+        private static readonly string Vector = "2019";
 
         // se convierte el vector y la key a bytes
 
